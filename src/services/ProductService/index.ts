@@ -62,7 +62,11 @@ class GroceryProductService {
             const productId = isProductAlreadyPresent?.getDataValue("id");
 
             if (isDeleted !== null && productId !== undefined) {
-                return await this.enableProductAgain(productId);
+                const updateResponse = await this.enableProductAgain(productId);
+                return {
+                    message: "Product is enabled again",
+                    response: updateResponse
+                }
             }
 
             const productInsertResponse = await this.groceryProducts.create({
