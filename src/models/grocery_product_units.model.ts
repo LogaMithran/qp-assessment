@@ -10,7 +10,7 @@ export interface GroceryProductUnitAttributes {
     expiry: Date;
     unit_category: string;
     price: number;
-    is_deleted: Date,
+    is_deleted: Date | null,
     createdAt: Date;
     updatedAt: Date
 }

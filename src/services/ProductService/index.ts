@@ -55,9 +55,16 @@ class GroceryProductService {
                     {product_name: body.product_name},
                 attributes: ["id"]
             })
-            if (isProductAlreadyPresent?.getDataValue("id")) {
+            if (isProductAlreadyPresent?.getDataValue("id") && isProductAlreadyPresent?.getDataValue("is_deleted") === null) {
                 throw new Error("Product is already there")
             }
+            const isDeleted = isProductAlreadyPresent?.getDataValue("is_deleted");
+            const productId = isProductAlreadyPresent?.getDataValue("id");
+
+            if (isDeleted !== null && productId !== undefined) {
+                return await this.enableProductAgain(productId);
+            }
+
             const productInsertResponse = await this.groceryProducts.create({
                 product_name: body.product_name,
                 category: body.category,
@@ -166,6 +173,21 @@ class GroceryProductService {
             where: {
                 item_sku: itemSku
             },
+        })
+    }
+
+    async enableProductAgain(productId: number) {
+        return await sequelizeConnector.transaction(async t => {
+            const updateProductResponse = await this.groceryProducts.update({
+                is_deleted: null,
+                updatedAt: new Date()
+            }, {where: {id: productId}, transaction: t});
+
+            const unitUpdateResponse = await this.groceryUnit.update({
+                is_deleted: null,
+            }, {where: {product_id: productId}})
+
+            return [updateProductResponse, unitUpdateResponse]
         })
     }
 }

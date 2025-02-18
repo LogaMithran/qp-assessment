@@ -6,7 +6,7 @@ export interface GroceryProductsAttributes {
     id: number;
     product_name: string;
     category: string;
-    is_deleted: Date;
+    is_deleted: Date | null;
     createdAt: Date;
     updatedAt: Date;
 }
