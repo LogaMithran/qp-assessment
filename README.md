@@ -6,7 +6,6 @@ A backend application system for managing the grocery and customer grocery order
 
 ![Logo](src/assests/Grocery application.png)
 
-
 ## API Reference
 
 ### Visit the API at
@@ -77,6 +76,16 @@ For creating or updating the product the payload is same for updating we need to
 ```
 
 #### Sample cURL Request for getting the product
+
+### With limit and offset
+
+```sh
+curl --request GET \
+  --url 'https://qp-assessment-t9bn.onrender.com/v1/products?limit=10&page=1' \
+  --header 'content-type: application/json'
+```
+
+### Using product name filter
 
 ```sh
 curl --request GET \
