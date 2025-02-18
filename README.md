@@ -2,6 +2,11 @@
 
 A backend application system for managing the grocery and customer grocery orders
 
+## Database schema
+
+![Logo](src/assests/Grocery application.png)
+
+
 ## API Reference
 
 ### Visit the API at
