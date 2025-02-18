@@ -33,12 +33,11 @@ class CustomerService {
                     item_value: item.item_value,
                 }
             })
-            console.log(itemObj)
             const orderItemCreateResponse = await this.orderItem.bulkCreate(itemObj, {transaction: t})
 
             if (orderCreateResponse.dataValues && orderItemCreateResponse) {
                 const updateResponse = await this.productService.updateInventory(body)
-                console.log("Update Response", updateResponse)
+                console.log("Update inventory Response", updateResponse)
             }
 
             return {

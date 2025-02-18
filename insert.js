@@ -186,7 +186,7 @@ async function sendProducts() {
     for (const product of products) {
         console.log(product)
         try {
-            const response = await fetch('http://localhost:3000/v1/products/', {
+            const response = await fetch('https://qp-assessment-t9bn.onrender.com/v1/products/', {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify(product)
